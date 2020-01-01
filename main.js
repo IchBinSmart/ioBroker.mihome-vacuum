@@ -795,16 +795,25 @@ function newGen(model) {
             },
             native: {}
         });
-        adapter.extendObject('control.fan_power', {
+        adapter.setObjectNotExists('control.fan_power', {
+            type: 'state',
             common: {
-                max: 105,
+                name: "Suction power",
+                type: 'number',
+                role: 'level',
+                min: 101,
+                max: 104,
+                read: true,
+                write: true,
+                desc: 'Values for Roborock S6',
+                max: 104,
                 states: {
                   101: "Quiet",
                   102: "Balanced", 
                   103: "Turbo",
                   104: "Maximum",
-                  105: "MOP"
-                }
+                },
+                native: {}
             }
         });
     }
