@@ -556,7 +556,7 @@ function getLog(callback, i) {
 
 function isEquivalent(a, b) {
     // Create arrays of property names
-    const aProps = Object.getOwnPropertyNames(a);
+    const aProps = Object.getOwnPropertyNames(a);fan_
     const bProps = Object.getOwnPropertyNames(b);
 
     // If number of properties is different,
@@ -579,7 +579,6 @@ function isEquivalent(a, b) {
     // are considered equivalent
     return true;
 }
-
 
 function makeTable(line) {
     // const head = clean_log_html_head;
@@ -795,7 +794,7 @@ function newGen(model) {
             },
             native: {}
         });
-        adapter.setObjectNotExists('control.fan_power', {
+        adapter.extendObject('control.fan_power', {
             type: 'state',
             common: {
                 name: "Suction power",
@@ -816,8 +815,29 @@ function newGen(model) {
                 native: {}
             }
         });
-    }
-    else if (!model === 'roborock.vacuum.s5' && !fwNew) {
+    } else if (model === 'roborock.vacuum.s6') {
+        adapter.extendObject('control.fan_power', {
+            type: 'state',
+            common: {
+                name: "Suction power",
+                type: 'number',
+                role: 'level',
+                min: 101,
+                max: 104,
+                read: true,
+                write: true,
+                desc: 'Values for Roborock S6',
+                max: 104,
+                states: {
+                  101: "Quiet",
+                  102: "Balanced", 
+                  103: "Turbo",
+                  104: "Maximum",
+                },
+                native: {}
+            }
+        });
+    } else if (!model === 'roborock.vacuum.s5' && !fwNew) {
         adapter.deleteState(adapter.namespace, 'control', 'goTo');
         adapter.deleteState(adapter.namespace, 'control', 'zoneClean');
         adapter.deleteState(adapter.namespace, 'control', 'carpet_mode');
