@@ -799,6 +799,10 @@ function newGen(model) {
             common: {
                 max: 105,
                 states: {
+                  101: "Quiet"
+                  102: "Balanced"
+                  103: "Turbo"
+                  104: "Maximum"
                   105: "MOP"
                 }
             }
